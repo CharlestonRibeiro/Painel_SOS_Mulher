@@ -1,16 +1,26 @@
-# painel_sos_mulher
+# Painel de Controle SOS Mulher
 
-A new Flutter project.
+O Painel de Controle SOS Mulher é uma aplicação móvel desenvolvida em Flutter que serve como interface de gerenciamento para receber e visualizar dados de localização e áudios enviados por um aplicativo móvel de SOS para mulheres.
 
-## Getting Started
+## Visão Geral
 
-This project is a starting point for a Flutter application.
+Esta aplicação foi desenvolvido para auxiliar na gestão de situações de emergência, permitindo que administradores monitorem em tempo real a localização e os áudios enviados por usuárias do aplicativo SOS Mulher.
 
-A few resources to get you started if this is your first Flutter project:
+## Funcionalidades Principais
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Visualização em Tempo Real:** Receba e visualize as localizações e áudios enviados pelas usuárias em tempo real em um mapa interativo.
+  
+- **Gerenciamento de Alertas:** Visualize detalhes dos alertas recebidos, incluindo informações de localização.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Tecnologias Utilizadas
+
+- **Flutter:** Framework de desenvolvimento de aplicações multiplataforma.
+- **Dart:** Linguagem de programação utilizada pelo Flutter.
+
+## Arquitetura 
+
+Para mais detalhes sobre a arquitetura e o desenvolvimento do aplicativo GUESTVIP, incluindo escolhas tecnológicas, padrões de design e infraestrutura, consulte o [Documentação da Arquitetura](ARCHITECTURE.md).
+
+
+
