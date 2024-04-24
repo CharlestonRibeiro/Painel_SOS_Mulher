@@ -18,5 +18,9 @@ Esta aplicação foi desenvolvido para auxiliar na gestão de situações de eme
 - **Flutter:** Framework de desenvolvimento de aplicações multiplataforma.
 - **Dart:** Linguagem de programação utilizada pelo Flutter.
 
+## Arquitetura 
+
+Para mais detalhes sobre a arquitetura e o desenvolvimento do aplicativo GUESTVIP, incluindo escolhas tecnológicas, padrões de design e infraestrutura, consulte o [Documentação da Arquitetura](ARCHITECTURE.md).
+
 
 
