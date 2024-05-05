@@ -42,12 +42,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBsdnXxngwAotShP24I2ZYC5cY2dDBvcjs',
-    appId: '1:309484748354:web:58daf43b2ca54e62e3b7db',
+    appId: '1:309484748354:web:14e6ccf569b68ccde3b7db',
     messagingSenderId: '309484748354',
     projectId: 'sos-mulher-612e1',
     authDomain: 'sos-mulher-612e1.firebaseapp.com',
     storageBucket: 'sos-mulher-612e1.appspot.com',
-    measurementId: 'G-JF2SGJEL1S',
+    measurementId: 'G-QFZB237SE0',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'sos-mulher-612e1.appspot.com',
     measurementId: 'G-QFZB237SE0',
   );
+
 }
