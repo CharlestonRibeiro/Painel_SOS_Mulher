@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "309484748354",
+    "project_id": "sos-mulher-612e1",
+    "storage_bucket": "sos-mulher-612e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309484748354:android:a2d64a97e8d254e7e3b7db",
+        "android_client_info": {
+          "package_name": "com.example.painel_sos_mulher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACDtbPLaqMI3xIELmDjukEEXWWpI76Pps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309484748354:android:84c3272530f99747e3b7db",
+        "android_client_info": {
+          "package_name": "com.example.sos_mulher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACDtbPLaqMI3xIELmDjukEEXWWpI76Pps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
