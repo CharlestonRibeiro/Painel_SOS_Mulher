@@ -1,11 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../models/user_model.dart';
 
 class FirebaseUserRepository {
-  Future<String> signIn({
-    required String emailOrName,
+  FirebaseUserRepository( this.firebaseAuth);
+
+  FirebaseAuth firebaseAuth;
+
+
+  Future<void> signIn({
+    required String email,
     required String password,
   }) async {
-     return '';
+    await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
   }
   
   Future<String> signUp({

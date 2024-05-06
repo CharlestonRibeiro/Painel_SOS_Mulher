@@ -6,7 +6,7 @@ import 'package:painel_sos_mulher/app/modules/auth/auth_module.dart';
 class AppModule extends Module {
   @override
   void exportedBinds(Injector i) {
-      
+     
   }
 
   @override

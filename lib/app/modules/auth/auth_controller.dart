@@ -42,7 +42,7 @@ class AuthController extends Cubit<AuthState> {
     emit(LoadingAuthState());
     try {
       await _authRepo.signIn(
-        emailOrName: email.text,
+        email: email.text,
         password: password.text,
       );
       await _authRepo.setCurrentUser(

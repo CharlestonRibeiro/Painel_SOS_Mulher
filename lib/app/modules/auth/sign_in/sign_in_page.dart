@@ -56,7 +56,7 @@ class SignInPage extends StatelessWidget {
                         colored: false,
                       ),
                     _ => ElevatedButton(
-                    onPressed: _controller.signUp,
+                    onPressed: _controller.signIn,
                     child: const Text('FINALIZAR CADASTRO'),
                     ),
                   },
