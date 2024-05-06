@@ -8,7 +8,3 @@ abstract interface class AppError implements Exception {
 }
 
 abstract interface class ClientError implements AppError {}
-
-abstract interface class StorageError implements AppError {}
-
-abstract interface class DataError implements AppError {}
