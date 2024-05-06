@@ -6,8 +6,6 @@ import 'package:painel_sos_mulher/app/modules/auth/auth_states.dart';
 
 import '../../core/errors/app_error_interface.dart';
 import '../../data/repository/firebase_user_repository.dart';
-import '../../models/user_model.dart';
-
 class AuthController extends Cubit<AuthState> {
   AuthController(this._authRepo) : super(InitialAuthState());
 
@@ -22,13 +20,8 @@ class AuthController extends Cubit<AuthState> {
     emit(LoadingAuthState());
     try {
       await _authRepo.signUp(
-        name: name.text,
-        lastName: lastName.text,
         email: email.text,
         password: password.text,
-      );
-      await _authRepo.setCurrentUser(
-        UserModel(name: name.text, email: email.text, password: password.text),
       );
       emit(SuccessAuthState());
     } on AppError catch (e) {
@@ -44,9 +37,6 @@ class AuthController extends Cubit<AuthState> {
       await _authRepo.signIn(
         email: email.text,
         password: password.text,
-      );
-      await _authRepo.setCurrentUser(
-        UserModel(name: name.text, email: email.text, password: password.text),
       );
       emit(SuccessAuthState());
     } on AppError catch (e) {

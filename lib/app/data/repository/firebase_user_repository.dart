@@ -1,34 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../models/user_model.dart';
-
 class FirebaseUserRepository {
-  FirebaseUserRepository( this.firebaseAuth);
+  FirebaseUserRepository(this.firebaseAuth);
 
-  FirebaseAuth firebaseAuth;
-
+  final FirebaseAuth firebaseAuth;
 
   Future<void> signIn({
     required String email,
     required String password,
   }) async {
-    await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-  }
-  
-  Future<String> signUp({
-      required String name,
-      required String lastName,
-      required String email,
-      required String password
-      }) async {
-    return '';
+    await firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
   }
 
-  Future<bool> setCurrentUser(UserModel user) async {
-    return true;
-  }
+  Future<void> signUp({
+    required String email,
+    required String password,
+  }) async {
 
-  Future<UserModel?> getCurrentUser() async {
-    return null;
+    await firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
   }
 }

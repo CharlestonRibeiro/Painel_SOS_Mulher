@@ -1,18 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/routes/routes.dart';
-import '../../../core/widgets/loading_indicator.dart';
-import '../auth_controller.dart';
-import '../auth_states.dart';
+import '../../core/routes/routes.dart';
+import '../../core/widgets/loading_indicator.dart';
+import 'auth_controller.dart';
+import 'auth_states.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage(this._controller, {super.key});
+class AuthPage extends StatelessWidget {
+  const AuthPage(this._controller, this.firebaseAuth, {super.key});
 
   final AuthController _controller;
+  final FirebaseAuth firebaseAuth;
 
   @override
   Widget build(BuildContext context) {
+
+    User? currentUser = firebaseAuth.currentUser;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -56,27 +61,12 @@ class SignInPage extends StatelessWidget {
                         colored: false,
                       ),
                     _ => ElevatedButton(
-                    onPressed: _controller.signIn,
+                    onPressed: currentUser == null ? _controller.signUp : _controller.signIn,
                     child: const Text('FINALIZAR CADASTRO'),
                     ),
                   },
                 ),
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Não tem uma conta? ',
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          Routes.i.pushNamed(Routes.auth + Routes.signUp),
-                      child: const Text(
-                        'REGISTRAR',
-                      ),
-                    )
-                  ],
-                ),
+               
               ],
             ),
           ],

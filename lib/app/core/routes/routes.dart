@@ -6,8 +6,6 @@ abstract class Routes {
   
   static const home = '/home';
   static const auth = '/auth';
-  static const signIn = '/sign-in';
-  static const signUp = '/sign-up';
 
   static const root = '/';
 
