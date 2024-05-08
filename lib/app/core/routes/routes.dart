@@ -5,7 +5,7 @@ abstract class Routes {
   static Routes get i => ModularRoutes();
   
   static const home = '/home';
-  static const auth = '/auth';
+  static const signIn = '/SignIn';
 
   static const root = '/';
 

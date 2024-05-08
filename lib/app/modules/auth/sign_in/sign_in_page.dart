@@ -2,13 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/routes/routes.dart';
-import '../../core/widgets/loading_indicator.dart';
-import 'auth_controller.dart';
-import 'auth_states.dart';
+import '../../../core/routes/routes.dart';
+import '../../../core/widgets/loading_indicator.dart';
+import '../auth_controller.dart';
+import '../auth_states.dart';
 
-class AuthPage extends StatelessWidget {
-  const AuthPage(this._controller, this.firebaseAuth, {super.key});
+class SignInPage extends StatelessWidget {
+  const SignInPage(this._controller, this.firebaseAuth, {super.key});
 
   final AuthController _controller;
   final FirebaseAuth firebaseAuth;

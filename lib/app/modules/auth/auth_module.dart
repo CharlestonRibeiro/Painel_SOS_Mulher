@@ -4,7 +4,7 @@ import '../../app_modular.dart';
 import '../../core/routes/routes.dart';
 import '../../data/repository/firebase_user_repository.dart';
 import 'auth_controller.dart';
-import 'auth_page.dart';
+import 'sign_in/sign_in_page.dart';
 
 class AuthModule extends Module {
 
@@ -20,6 +20,6 @@ class AuthModule extends Module {
 
   @override
   void routes(r) {
-    r.child(Routes.root, child: (context) => AuthPage(Modular.get(), Modular.get()));
+    r.child(Routes.root, child: (context) => SignInPage(Modular.get(), Modular.get()));
   }
 }
