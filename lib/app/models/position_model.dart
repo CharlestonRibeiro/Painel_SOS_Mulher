@@ -11,15 +11,20 @@ final class Position {
     required this.longitude,
   });
 
-  factory Position.fromMap(String id, Map<String, dynamic> map) {
+  factory Position.fromMap(Map<String, dynamic> map) {
     return switch (map) {
-      {'latitude': double lat, 'longitude': double lng} => Position(
+      {
+        'id': String id,
+        'latitude': double lat,
+        'longitude': double lng,
+      } =>
+        Position(
           id: id,
           latitude: lat,
           longitude: lng,
         ),
       _ => throw DataFormatError(
-          map.toString(), "{'latitude':double, 'longitude': double}"),
+          map.toString(), "{'id': String, 'latitude':double, 'longitude': double}"),
     };
   }
 }

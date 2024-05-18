@@ -24,11 +24,13 @@ final class FirebaseClient implements ClientInterface {
     try {
       final result =
           await FirebaseFirestore.instance.collection(endpoint).get();
-      if (result.size != 0) {
-        return [...result.docs.map((e) => e.data())];
-      } else {
-        throw EmptyCollectionError(endpoint);
-      }
+      return [
+        ...result.docs.map((e) {
+          final map = e.data();
+          map.addAll({'id': e.id});
+          return map;
+        })
+      ];
     } catch (e) {
       rethrow;
     }
