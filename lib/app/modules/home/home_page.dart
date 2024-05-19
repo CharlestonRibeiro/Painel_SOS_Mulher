@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'components/locations_map.dart';
+import 'components/title.dart';
 import 'home_controller.dart';
 import 'home_states.dart';
 
@@ -14,16 +15,19 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     _controller.load();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Painel SOS'),
-      ),
       body: BlocBuilder<HomeController, HomeState>(
         bloc: _controller,
         builder: (context, state) {
           return switch (state) {
             LoadingHomeState() =>
               const Center(child: CircularProgressIndicator()),
-            SuccessHomeState() => LocationsMap(_controller),
+            SuccessHomeState() => Stack(
+                fit: StackFit.expand,
+                children: [
+                  LocationsMap(_controller),
+                  const TitleText(),
+                ],
+              ),
             ErrorHomeState() => const SizedBox.shrink(),
           };
         },
