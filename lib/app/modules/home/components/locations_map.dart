@@ -34,19 +34,24 @@ class LocationsMap extends StatelessWidget {
             ),
             style: LocationMarkerStyle(
               markerSize: const Size(400, 80),
-              marker: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    e.id,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                  const Icon(
-                    Icons.location_pin,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
+              marker: e.alert
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          e.id,
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                        const Icon(
+                          Icons.location_history,
+                          color: Colors.red,
+                        ),
+                      ],
+                    )
+                  : const Icon(
+                      Icons.location_pin,
+                      color: Colors.green,
+                    ),
             ),
           ),
         ),
