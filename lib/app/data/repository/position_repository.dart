@@ -9,7 +9,7 @@ final class PositionRepository {
   Future<List<Position>> getAllPositions() async {
     try {
       final data = await _client.getAll('location');
-      final positions = List<Position>.empty();
+      final positions = <Position>[];
       for (var map in data) {
         positions.add(Position.fromMap(map));
       }
