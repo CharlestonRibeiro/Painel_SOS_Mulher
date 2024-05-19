@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _controller.load();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Painel SOS'),
