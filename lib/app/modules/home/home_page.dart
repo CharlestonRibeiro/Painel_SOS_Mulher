@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
         title: const Text('Painel SOS'),
       ),
       body: BlocBuilder<HomeController, HomeState>(
+        bloc: _controller,
         builder: (context, state) {
           return switch (state) {
             LoadingHomeState() =>

@@ -1,21 +1,22 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:painel_sos_mulher/app/core/routes/routes.dart';
-import 'package:painel_sos_mulher/app/modules/auth/auth_module.dart';
 
+import 'core/routes/routes.dart';
+import 'data/clients/client_interface.dart';
+import 'data/clients/firebase_client.dart';
+import 'modules/auth/auth_module.dart';
+import 'modules/home/home_module.dart';
 
 class AppModule extends Module {
   @override
-  void exportedBinds(Injector i) {
-     
-  }
+  void exportedBinds(Injector i) {}
 
   @override
   void binds(Injector i) {
-
+    i.addSingleton<ClientInterface>(FirebaseClient.new);
   }
 
   @override
   void routes(r) {
-    r.module(Routes.root, module: AuthModule());
+    r.module(Routes.root, module: HomeModule());
   }
 }
