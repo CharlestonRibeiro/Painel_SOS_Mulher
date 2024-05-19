@@ -32,10 +32,20 @@ class LocationsMap extends StatelessWidget {
               longitude: e.longitude,
               accuracy: 0.1,
             ),
-            style: const LocationMarkerStyle(
-              marker: Icon(
-                Icons.location_pin,
-                color: Colors.red,
+            style: LocationMarkerStyle(
+              markerSize: const Size(400, 80),
+              marker: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    e.id,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  const Icon(
+                    Icons.location_pin,
+                    color: Colors.red,
+                  ),
+                ],
               ),
             ),
           ),
