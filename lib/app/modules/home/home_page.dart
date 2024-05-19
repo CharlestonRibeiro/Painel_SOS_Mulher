@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'components/locations_map.dart';
 import 'home_controller.dart';
 import 'home_states.dart';
 
@@ -22,11 +23,7 @@ class HomePage extends StatelessWidget {
           return switch (state) {
             LoadingHomeState() =>
               const Center(child: CircularProgressIndicator()),
-            SuccessHomeState() => ListView.builder(
-                itemCount: _controller.allPositions.length,
-                itemBuilder: (context, index) =>
-                    Text(_controller.allPositions[index].id),
-              ),
+            SuccessHomeState() => LocationsMap(_controller),
             ErrorHomeState() => const SizedBox.shrink(),
           };
         },
