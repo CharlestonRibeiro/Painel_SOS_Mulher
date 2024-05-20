@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'components/locations_map.dart';
+import 'components/options_bar.dart';
 import 'components/title.dart';
 import 'home_controller.dart';
 import 'home_states.dart';
@@ -26,6 +28,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   LocationsMap(_controller),
                   const TitleText(),
+                  const OptionsBar(),
                 ],
               ),
             ErrorHomeState() => const SizedBox.shrink(),
