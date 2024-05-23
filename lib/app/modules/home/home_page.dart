@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/routes/navigation_side_bar.dart';
+import 'components/audio_component.dart';
 import 'components/locations_map.dart';
 import 'components/options_bar.dart';
 import 'components/title.dart';
@@ -28,11 +29,13 @@ class HomePage extends StatelessWidget {
                   LoadingHomeState() =>
                     const Center(child: CircularProgressIndicator()),
                   SuccessHomeState() => Stack(
+                      alignment: Alignment.center,
                       fit: StackFit.expand,
                       children: [
                         LocationsMap(_controller),
                         const TitleText(),
                         const OptionsBar(),
+                        const AudioComponent(),
                       ],
                     ),
                   ErrorHomeState() => const SizedBox.shrink(),
