@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/routes/navigation_side_bar.dart';
 import 'components/locations_map.dart';
 import 'components/options_bar.dart';
 import 'components/title.dart';
@@ -17,23 +17,30 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     _controller.load();
     return Scaffold(
-      body: BlocBuilder<HomeController, HomeState>(
-        bloc: _controller,
-        builder: (context, state) {
-          return switch (state) {
-            LoadingHomeState() =>
-              const Center(child: CircularProgressIndicator()),
-            SuccessHomeState() => Stack(
-                fit: StackFit.expand,
-                children: [
-                  LocationsMap(_controller),
-                  const TitleText(),
-                  const OptionsBar(),
-                ],
-              ),
-            ErrorHomeState() => const SizedBox.shrink(),
-          };
-        },
+      body: Row(
+        children: [
+          const NavigationSideBar(),
+          Expanded(
+            child: BlocBuilder<HomeController, HomeState>(
+              bloc: _controller,
+              builder: (context, state) {
+                return switch (state) {
+                  LoadingHomeState() =>
+                    const Center(child: CircularProgressIndicator()),
+                  SuccessHomeState() => Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        LocationsMap(_controller),
+                        const TitleText(),
+                        const OptionsBar(),
+                      ],
+                    ),
+                  ErrorHomeState() => const SizedBox.shrink(),
+                };
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
