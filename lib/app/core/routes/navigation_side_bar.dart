@@ -35,6 +35,7 @@ class NavigationSideBar extends StatelessWidget {
             Routes.i.pushReplacementNamed(destinations[value].$2);
           },
           useIndicator: false,
+          groupAlignment: -0.8,
         );
       },
     );

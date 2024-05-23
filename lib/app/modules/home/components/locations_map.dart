@@ -39,7 +39,8 @@ class LocationsMap extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          e.id,
+                          'SOS RECEBIDO\n${e.id}',
+                          textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
                         const Icon(
