@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'client_errors.dart';
 import 'client_interface.dart';
@@ -34,5 +35,28 @@ final class FirebaseClient implements ClientInterface {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAllFiles() async {
+    try {
+      final result = await FirebaseStorage.instance.ref().list();
+      final list = <Map<String, dynamic>>[];
+      for (var idRef in result.prefixes) {
+        final docs = await idRef.list();
+        for (var docRef in docs.items) {
+          final url = await docRef.getDownloadURL();
+          list.add({'id': idRef.name, 'url': url, 'time': docRef.name});
+        }
+      }
+      return list;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String> getFile(String id) async {
+    throw UnimplementedError();
   }
 }
