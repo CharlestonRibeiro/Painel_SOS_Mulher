@@ -22,7 +22,8 @@ class AudiosListView extends StatelessWidget {
       bloc: _controller,
       builder: (context, state) {
         return switch (state) {
-          LoadingAudioState() =>
+          LoadingAudioState() ||
+          InitialAudioState() =>
             const Center(child: CircularProgressIndicator()),
           SuccessAudioState() => ListView.builder(
               itemCount: _controller.allAudios.length,
