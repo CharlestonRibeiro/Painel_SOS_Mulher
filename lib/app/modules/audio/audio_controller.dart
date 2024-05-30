@@ -67,7 +67,7 @@ class AudioController extends Cubit<AudioState> {
     }
   }
 
-  void seekBack() {
+  void seekRewind() {
     if (_player.position > const Duration(seconds: 2)) {
       _player.seek(Duration(seconds: _player.position.inSeconds - 2));
     } else {
@@ -89,6 +89,7 @@ class AudioController extends Cubit<AudioState> {
   }
 
   void playCurrent() {
+    playingIndex.value = selectedIndex.value;
     _player.play();
   }
 }
