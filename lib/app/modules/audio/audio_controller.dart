@@ -85,6 +85,7 @@ class AudioController extends Cubit<AudioState> {
   }
 
   void pause() {
+    playingIndex.value = -1;
     _player.pause();
   }
 
