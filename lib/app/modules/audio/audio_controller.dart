@@ -13,6 +13,7 @@ class AudioController extends Cubit<AudioState> {
       if (event == ProcessingState.completed) {
         playingIndex.value = -1;
         _player.stop();
+        _player.seek(null);
       }
     });
   }
@@ -80,7 +81,9 @@ class AudioController extends Cubit<AudioState> {
     if (_player.position < Duration(seconds: max.inSeconds - 2)) {
       _player.seek(Duration(seconds: _player.position.inSeconds + 2));
     } else {
+      playingIndex.value = -1;
       _player.stop();
+      _player.seek(null);
     }
   }
 
