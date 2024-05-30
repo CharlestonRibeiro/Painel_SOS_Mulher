@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -16,14 +17,16 @@ class AudioController extends Cubit<AudioState> {
         _player.seek(null);
       }
     });
+    positionStream = _player.positionStream;
   }
 
   final AudioRepository _repo;
   final allAudios = <Audio>[];
-  final durations = <String>[];
+  final durations = <(Duration, String)>[];
   final _player = AudioPlayer();
   final selectedIndex = ValueNotifier(-1);
   final playingIndex = ValueNotifier(-1);
+  late final Stream<Duration> positionStream;
 
   Future<void> load() async {
     if (state is! LoadingAudioState) {
@@ -34,7 +37,7 @@ class AudioController extends Cubit<AudioState> {
         allAudios.addAll(await _repo.getAllAudios());
         for (var audio in allAudios) {
           final duration = await _player.setUrl(audio.url);
-          durations.add(duration.toString().split('.')[0]);
+          durations.add((duration!, duration.toString().split('.')[0]));
         }
         emit(SuccessAudioState());
       } on AppError catch (e) {

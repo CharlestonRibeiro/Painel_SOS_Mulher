@@ -35,7 +35,7 @@ class AudiosListView extends StatelessWidget {
                   isPlaying: index == _controller.playingIndex.value,
                   index: index + 1,
                   id: _controller.allAudios[index].id,
-                  duration: _controller.durations[index],
+                  duration: _controller.durations[index].$2,
                   playFunction: () => _controller.select(index),
                 ),
               ),

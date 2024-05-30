@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:painel_sos_mulher/app/modules/audio/audio_controller.dart';
-import 'package:painel_sos_mulher/app/modules/audio/audio_states.dart';
+
+import '../audio_controller.dart';
+import '../audio_states.dart';
+import 'player/audio_player.dart';
 
 class AudioBody extends StatelessWidget {
   const AudioBody(this._controller, {super.key});
@@ -18,18 +20,25 @@ class AudioBody extends StatelessWidget {
           ),
         SuccessAudioState() => ValueListenableBuilder(
             valueListenable: _controller.selectedIndex,
-            builder: (context, value, child) => value == -1
-                ? const SizedBox.shrink()
-                : Column(
-                    children: [
-                      const SizedBox(height: 80),
-                      Text(
-                        _controller
-                            .allAudios[_controller.selectedIndex.value].id,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
+            builder: (context, index, child) {
+              return index == -1
+                  ? const SizedBox.shrink()
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                _controller.allAudios[index].id,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                        AudioPlayer(_controller),
+                      ],
+                    );
+            },
           ),
         _ => const SizedBox.shrink(),
       },
