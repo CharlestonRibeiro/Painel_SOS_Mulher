@@ -28,6 +28,7 @@ class AudioController extends Cubit<AudioState> {
     emit(LoadingAudioState());
     try {
       allAudios.clear();
+      durations.clear();
       allAudios.addAll(await _repo.getAllAudios());
       for (var audio in allAudios) {
         final duration = await _player.setUrl(audio.url);
