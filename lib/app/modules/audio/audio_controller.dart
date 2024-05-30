@@ -52,4 +52,43 @@ class AudioController extends Cubit<AudioState> {
     selectedIndex.value = index;
     play(index);
   }
+
+  void previous() {
+    if (selectedIndex.value > 0) {
+      selectedIndex.value = selectedIndex.value - 1;
+      play(selectedIndex.value);
+    }
+  }
+
+  void next() {
+    if (selectedIndex.value < allAudios.length - 1) {
+      selectedIndex.value = selectedIndex.value + 1;
+      play(selectedIndex.value);
+    }
+  }
+
+  void seekBack() {
+    if (_player.position > const Duration(seconds: 2)) {
+      _player.seek(Duration(seconds: _player.position.inSeconds - 2));
+    } else {
+      _player.seek(null);
+    }
+  }
+
+  void seekForward() {
+    final max = _player.duration ?? Duration.zero;
+    if (_player.position < Duration(seconds: max.inSeconds - 2)) {
+      _player.seek(Duration(seconds: _player.position.inSeconds + 2));
+    } else {
+      _player.stop();
+    }
+  }
+
+  void pause() {
+    _player.pause();
+  }
+
+  void playCurrent() {
+    _player.play();
+  }
 }
