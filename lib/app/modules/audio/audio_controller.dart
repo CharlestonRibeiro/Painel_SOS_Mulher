@@ -25,18 +25,20 @@ class AudioController extends Cubit<AudioState> {
   final playingIndex = ValueNotifier(-1);
 
   Future<void> load() async {
-    emit(LoadingAudioState());
-    try {
-      allAudios.clear();
-      durations.clear();
-      allAudios.addAll(await _repo.getAllAudios());
-      for (var audio in allAudios) {
-        final duration = await _player.setUrl(audio.url);
-        durations.add(duration.toString().split('.')[0]);
+    if (state is! LoadingAudioState) {
+      emit(LoadingAudioState());
+      try {
+        allAudios.clear();
+        durations.clear();
+        allAudios.addAll(await _repo.getAllAudios());
+        for (var audio in allAudios) {
+          final duration = await _player.setUrl(audio.url);
+          durations.add(duration.toString().split('.')[0]);
+        }
+        emit(SuccessAudioState());
+      } on AppError catch (e) {
+        emit(ErrorAudioState(e));
       }
-      emit(SuccessAudioState());
-    } on AppError catch (e) {
-      emit(ErrorAudioState(e));
     }
   }
 
