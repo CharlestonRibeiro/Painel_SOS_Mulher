@@ -8,7 +8,7 @@ import '../../models/audio_model.dart';
 import 'audio_states.dart';
 
 class AudioController extends Cubit<AudioState> {
-  AudioController(this._repo) : super(LoadingAudioState()) {
+  AudioController(this._repo) : super(InitialAudioState()) {
     _player.processingStateStream.listen((event) {
       if (event == ProcessingState.completed) {
         playingIndex.value = -1;
