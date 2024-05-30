@@ -43,7 +43,8 @@ final class Audio {
           latitude: 0,
           longitude: 0,
           url: url,
-          time: DateTime.parse(time.replaceAll('.wav', '')),
+          time:
+              DateTime.parse(time.replaceAll('.aac', '').replaceAll('_', ':')),
         ),
       _ => throw DataFormatError(
           map.toString(),

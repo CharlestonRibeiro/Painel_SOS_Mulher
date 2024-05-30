@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'audio_tile.dart';
+import '../../../core/widgets/audios_listview.dart';
+import '../../audio/audio_controller.dart';
 
 class AudioComponent extends StatelessWidget {
-  const AudioComponent({super.key});
+  const AudioComponent(this._controller, {super.key});
+
+  final AudioController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +29,7 @@ class AudioComponent extends StatelessWidget {
               ),
             ),
             Expanded(
-              // TODO: dinamizar valores (audios module)
-              child: ListView.builder(
-                itemCount: 8,
-                itemBuilder: (context, index) => AudioTile(
-                  isSelected: index == 0,
-                  isPlaying: index == 0,
-                  index: index + 1,
-                  id: 'U87YTFGVHBJIUYFHRTTGHJE6RTG',
-                  duration: '0:45',
-                ),
-              ),
+              child: AudiosListView(_controller, showPlayingIcons: true),
             ),
           ],
         ),

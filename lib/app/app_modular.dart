@@ -3,6 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'core/routes/routes.dart';
 import 'data/clients/client_interface.dart';
 import 'data/clients/firebase_client.dart';
+import 'data/repository/audio_repository.dart';
+import 'modules/audio/audio_controller.dart';
 import 'modules/audio/audio_module.dart';
 import 'modules/auth/auth_module.dart';
 import 'modules/home/home_module.dart';
@@ -14,6 +16,8 @@ class AppModule extends Module {
   @override
   void binds(Injector i) {
     i.addSingleton<ClientInterface>(FirebaseClient.new);
+    i.addSingleton(AudioRepository.new);
+    i.addSingleton(AudioController.new);
   }
 
   @override
