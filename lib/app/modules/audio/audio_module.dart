@@ -9,11 +9,10 @@ final class AudioModule extends Module {
   List<Module> get imports => [AppModule()];
 
   @override
-  void binds(Injector i) {
-  }
-
-  @override
   void routes(r) {
-    r.child(Routes.root, child: (context) => AudioPage(Modular.get()));
+    r.child(
+      Routes.root,
+      child: (context) => AudioPage(Modular.get(), Modular.get()),
+    );
   }
 }

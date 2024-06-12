@@ -6,18 +6,22 @@ import '../../models/position_model.dart';
 import 'home_states.dart';
 
 class HomeController extends Cubit<HomeState> {
-  HomeController(this._repo) : super(LoadingHomeState());
+  HomeController(this._repo) : super(InitialHomeState()) {
+    load();
+  }
 
   final PositionRepository _repo;
   final allPositions = <Position>[];
 
   Future<void> load() async {
-    emit(LoadingHomeState());
-    try {
-      allPositions.addAll(await _repo.getAllPositions());
-      emit(SuccessHomeState());
-    } on AppError catch (e) {
-      emit(ErrorHomeState(e));
+    if (state is! LoadingHomeState) {
+      emit(LoadingHomeState());
+      try {
+        allPositions.addAll(await _repo.getAllPositions());
+        emit(SuccessHomeState());
+      } on AppError catch (e) {
+        emit(ErrorHomeState(e));
+      }
     }
   }
 }

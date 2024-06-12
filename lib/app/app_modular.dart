@@ -4,9 +4,11 @@ import 'core/routes/routes.dart';
 import 'data/clients/client_interface.dart';
 import 'data/clients/firebase_client.dart';
 import 'data/repository/audio_repository.dart';
+import 'data/repository/position_repository.dart';
 import 'modules/audio/audio_controller.dart';
 import 'modules/audio/audio_module.dart';
 import 'modules/auth/auth_module.dart';
+import 'modules/home/home_controller.dart';
 import 'modules/home/home_module.dart';
 
 class AppModule extends Module {
@@ -16,6 +18,8 @@ class AppModule extends Module {
   @override
   void binds(Injector i) {
     i.addSingleton<ClientInterface>(FirebaseClient.new);
+    i.addSingleton(PositionRepository.new);
+    i.addSingleton(HomeController.new);
     i.addSingleton(AudioRepository.new);
     i.addSingleton(AudioController.new);
   }

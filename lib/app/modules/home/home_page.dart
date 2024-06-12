@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
               bloc: _controller,
               builder: (context, state) {
                 return switch (state) {
+                  InitialHomeState() ||
                   LoadingHomeState() =>
                     const Center(child: CircularProgressIndicator()),
                   SuccessHomeState() => Stack(
