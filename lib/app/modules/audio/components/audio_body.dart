@@ -33,42 +33,22 @@ class AudioBody extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Maria Joaquina',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontWeight: FontWeight.w900),
-                              ),
-                              Text(
-                                audioData.id,
-                                style: const TextStyle(color: Colors.grey),
-                              ),
-                              const SizedBox(height: 20),
-                              Text(audioData.time.toReadable()),
-                              PositionText(_homeController, audioData),
-                            ],
+                          Text(
+                            'Maria Joaquina',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(fontWeight: FontWeight.w900),
                           ),
-                          Container(
-                            color: Colors.grey[400],
-                            padding: const EdgeInsets.all(16),
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('Lorem ipsum...'),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Text('Transcrever'),
-                                ),
-                              ],
-                            ),
+                          Text(
+                            audioData.id,
+                            style: const TextStyle(color: Colors.grey),
                           ),
+                          const SizedBox(height: 20),
+                          Text(audioData.time.toReadable()),
+                          PositionText(_homeController, audioData),
                         ],
                       ),
                     ),
