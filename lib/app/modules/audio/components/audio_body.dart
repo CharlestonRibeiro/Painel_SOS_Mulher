@@ -36,7 +36,7 @@ class AudioBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Maria Joaquina',
+                            audioData.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium
