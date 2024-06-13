@@ -54,6 +54,21 @@ class AudioBody extends StatelessWidget {
                               PositionText(_homeController, audioData),
                             ],
                           ),
+                          Container(
+                            color: Colors.grey[400],
+                            padding: const EdgeInsets.all(16),
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Lorem ipsum...'),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: const Text('Transcrever'),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

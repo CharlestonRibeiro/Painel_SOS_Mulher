@@ -9,10 +9,10 @@ class PainelSosMulher extends StatelessWidget {
       title: 'Painel SOS Mulher',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        // useMaterial3: true,
       ),
-       routerConfig: Modular.routerConfig,
+      routerConfig: Modular.routerConfig,
     );
   }
 }
