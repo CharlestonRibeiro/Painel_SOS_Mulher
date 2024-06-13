@@ -8,28 +8,35 @@ class AudioTile extends StatelessWidget {
     required this.index,
     required this.id,
     required this.duration,
+    required this.playFunction,
+    required this.showPlayingIcon,
   });
 
   final bool isSelected;
   final bool isPlaying;
+  final bool showPlayingIcon;
   final int index;
   final String id;
   final String duration;
+  final VoidCallback playFunction;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: ListTile(
+        onTap: playFunction,
         selected: isSelected,
         selectedTileColor: Colors.green,
         selectedColor: Colors.white,
         titleTextStyle: const TextStyle(overflow: TextOverflow.ellipsis),
-        leading: isPlaying
-            ? const Icon(
-                Icons.volume_up,
-                color: Colors.black,
-              )
-            : const SizedBox.shrink(),
+        leading: showPlayingIcon
+            ? isPlaying
+                ? const Icon(
+                    Icons.volume_up,
+                    color: Colors.black,
+                  )
+                : const SizedBox.shrink()
+            : null,
         title: Text('$index. $id'),
         trailing: Text(duration),
       ),

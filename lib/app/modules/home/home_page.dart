@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/routes/navigation_side_bar.dart';
+import '../audio/audio_controller.dart';
 import 'components/audio_component.dart';
 import 'components/locations_map.dart';
 import 'components/options_bar.dart';
@@ -10,9 +11,10 @@ import 'home_controller.dart';
 import 'home_states.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage(this._controller, {super.key});
+  const HomePage(this._controller, this._audioController, {super.key});
 
   final HomeController _controller;
+  final AudioController _audioController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class HomePage extends StatelessWidget {
               bloc: _controller,
               builder: (context, state) {
                 return switch (state) {
+                  InitialHomeState() ||
                   LoadingHomeState() =>
                     const Center(child: CircularProgressIndicator()),
                   SuccessHomeState() => Stack(
@@ -35,7 +38,7 @@ class HomePage extends StatelessWidget {
                         LocationsMap(_controller),
                         const TitleText(),
                         const OptionsBar(),
-                        const AudioComponent(),
+                        AudioComponent(_audioController),
                       ],
                     ),
                   ErrorHomeState() => const SizedBox.shrink(),

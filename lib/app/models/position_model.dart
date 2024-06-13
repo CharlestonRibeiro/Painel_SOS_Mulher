@@ -13,6 +13,9 @@ final class Position {
     required this.alert,
   });
 
+  factory Position.empty() =>
+      Position(id: '', latitude: 0, longitude: 0, alert: false);
+
   factory Position.fromMap(Map<String, dynamic> map) {
     return switch (map) {
       {
