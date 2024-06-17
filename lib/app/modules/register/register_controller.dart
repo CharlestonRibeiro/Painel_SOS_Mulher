@@ -1,14 +1,16 @@
+
 import 'dart:developer';
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:painel_sos_mulher/app/modules/auth/auth_states.dart';
+import 'package:painel_sos_mulher/app/modules/register/register_states.dart';
 
 import '../../core/errors/app_error_interface.dart';
 import '../../data/repository/firebase_user_repository.dart';
 
-class AuthController extends Cubit<AuthStates> {
-  AuthController(this._authRepo) : super(InitialAuthState());
+
+class AuthController extends Cubit<RegisterStates> {
+  AuthController(this._authRepo) : super(InitialRegisterState());
 
   final FirebaseUserRepository _authRepo;
 
@@ -18,32 +20,18 @@ class AuthController extends Cubit<AuthStates> {
   final password = TextEditingController(text: '');
 
   void signUp() async {
-    emit(LoadingAuthState());
+    emit(LoadingRegisterState());
     try {
       await _authRepo.signUp(
         email: email.text,
         password: password.text,
       );
-      emit(SuccessAuthState());
+      emit(SuccessRegisterState());
     } on AppError catch (e) {
-      emit(ErrorAuthState(e));
+      emit(ErrorRegisterState(e));
     } catch (e) {
       log('UNHANDLED ERROR: $e');
     }
   }
 
-  void signIn() async {
-    emit(LoadingAuthState());
-    try {
-      await _authRepo.signIn(
-        email: email.text,
-        password: password.text,
-      );
-      emit(SuccessAuthState());
-    } on AppError catch (e) {
-      emit(ErrorAuthState(e));
-    } catch (e) {
-      log('UNHANDLED ERROR: $e');
-    }
-  }
 }

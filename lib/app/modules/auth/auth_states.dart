@@ -1,14 +1,14 @@
 import '../../core/errors/app_error_interface.dart';
 
-sealed class AuthState {}
+sealed class AuthStates {}
 
-class InitialAuthState implements AuthState {}
+class InitialAuthState implements AuthStates {}
 
-class LoadingAuthState implements AuthState {}
+class LoadingAuthState implements AuthStates {}
 
-class SuccessAuthState implements AuthState {}
+class SuccessAuthState implements AuthStates {}
 
-class ErrorAuthState implements AuthState {
+class ErrorAuthState implements AuthStates {
   ErrorAuthState(this.error);
 
   final AppError error;
