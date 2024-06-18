@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 
-import '../../../models/position_model.dart';
+import '../home_controller.dart';
 
 class OptionsBar extends StatelessWidget {
-  const OptionsBar(this._positions, {super.key});
+  const OptionsBar(this._homeController, {super.key});
 
-  final List<Position> _positions;
+  final HomeController _homeController;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class OptionsBar extends StatelessWidget {
     BuildContext context,
     SearchController controller,
   ) =>
-      _positions
+      _homeController.allPositions
           .where((e) =>
               e.name.toLowerCase().contains(controller.text.toLowerCase()) ||
               e.id.toLowerCase().contains(controller.text.toLowerCase()))
@@ -61,7 +62,8 @@ class OptionsBar extends StatelessWidget {
                       color: Colors.red,
                     )
                   : null,
-              onTap: () {},
+              onTap: () => _homeController.mapController
+                  .move(LatLng(e.latitude, e.longitude), 18),
             ),
           );
 }
