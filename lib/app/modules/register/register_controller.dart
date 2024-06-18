@@ -9,8 +9,8 @@ import '../../core/errors/app_error_interface.dart';
 import '../../data/repository/firebase_user_repository.dart';
 
 
-class AuthController extends Cubit<RegisterStates> {
-  AuthController(this._authRepo) : super(InitialRegisterState());
+class RegisterController extends Cubit<RegisterStates> {
+  RegisterController(this._authRepo) : super(InitialRegisterState());
 
   final FirebaseUserRepository _authRepo;
 
