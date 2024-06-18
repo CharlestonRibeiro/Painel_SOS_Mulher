@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 import '../../core/errors/app_error_interface.dart';
 import '../../data/repository/position_repository.dart';
@@ -6,12 +7,13 @@ import '../../models/position_model.dart';
 import 'home_states.dart';
 
 class HomeController extends Cubit<HomeState> {
-  HomeController(this._repo) : super(InitialHomeState()) {
+  HomeController(this._repo, this.mapController) : super(InitialHomeState()) {
     load();
   }
 
   final PositionRepository _repo;
   final allPositions = <Position>[];
+  final MapController mapController;
 
   Future<void> load() async {
     if (state is! LoadingHomeState) {
