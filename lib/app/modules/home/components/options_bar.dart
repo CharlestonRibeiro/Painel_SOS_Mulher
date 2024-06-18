@@ -1,7 +1,12 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../../../models/position_model.dart';
+
 class OptionsBar extends StatelessWidget {
-  const OptionsBar({super.key});
+  const OptionsBar(this._positions, {super.key});
+
+  final List<Position> _positions;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +21,9 @@ class OptionsBar extends StatelessWidget {
               height: 40.0,
             ),
             barElevation: const MaterialStatePropertyAll(0),
-            barShape: const MaterialStatePropertyAll(
-              RoundedRectangleBorder(),
-            ),
+            barShape: const MaterialStatePropertyAll(RoundedRectangleBorder()),
             viewShape: const RoundedRectangleBorder(),
-            suggestionsBuilder: (
-              BuildContext context,
-              SearchController controller,
-            ) =>
-                [],
+            suggestionsBuilder: _buildSuggestions,
           ),
           const SizedBox(width: 8),
           IconButton(
@@ -43,4 +42,26 @@ class OptionsBar extends StatelessWidget {
       ),
     );
   }
+
+  FutureOr<Iterable<Widget>> _buildSuggestions(
+    BuildContext context,
+    SearchController controller,
+  ) =>
+      _positions
+          .where((e) =>
+              e.name.toLowerCase().contains(controller.text.toLowerCase()) ||
+              e.id.toLowerCase().contains(controller.text.toLowerCase()))
+          .map(
+            (e) => ListTile(
+              title: Text(e.name),
+              subtitle: Text(e.id),
+              leading: e.alert
+                  ? const Icon(
+                      Icons.priority_high,
+                      color: Colors.red,
+                    )
+                  : null,
+              onTap: () {},
+            ),
+          );
 }
