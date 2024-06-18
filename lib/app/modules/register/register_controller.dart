@@ -14,8 +14,8 @@ class RegisterController extends Cubit<RegisterStates> {
 
   final FirebaseUserRepository _authRepo;
 
-  final name = TextEditingController(text: '');
-  final lastName = TextEditingController(text: '');
+  final GlobalKey<FormState> formKey = GlobalKey();
+
   final email = TextEditingController(text: '');
   final password = TextEditingController(text: '');
 
