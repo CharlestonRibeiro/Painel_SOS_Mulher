@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:painel_sos_mulher/app/core/validator/form_validator.dart';
 import '../../core/constants/image_paths.dart';
+import '../../core/routes/navigation_side_bar.dart';
 import '../../core/routes/routes.dart';
 import '../../core/widgets/loading_indicator.dart';
 import 'register_controller.dart';
@@ -18,8 +19,12 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          const NavigationSideBar(),
+          Expanded(child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
           SizedBox(
             height: 500,
             child: Expanded(
@@ -109,7 +114,7 @@ class RegisterPage extends StatelessWidget {
                           obscureText: _controller.isHiddenConfirm.value,
                           validator: (value) =>
                               FormValidator.confirmValidatePassword(
-                                  _controller.password.value as String?, value),
+                                  _controller.password.text as String?, value),
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               label: const Text('Confirma Senha'),
@@ -186,7 +191,10 @@ class RegisterPage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+          ),],
+
+          )),
+
         ],
       ),
     );
