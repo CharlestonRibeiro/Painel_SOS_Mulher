@@ -21,21 +21,6 @@ class AuthController extends Cubit<AuthStates> {
     isHidden.value = !isHidden.value;
   }
 
-  void signUp() async {
-    emit(LoadingAuthState());
-    try {
-      await _authRepo.signUp(
-        email: email.text,
-        password: password.text,
-      );
-      emit(SuccessAuthState());
-    } on AppError catch (e) {
-      emit(ErrorAuthState(e));
-    } catch (e) {
-      log('UNHANDLED ERROR: $e');
-    }
-  }
-
   void signIn() async {
     emit(LoadingAuthState());
     try {

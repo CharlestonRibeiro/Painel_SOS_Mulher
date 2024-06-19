@@ -128,7 +128,7 @@ class AuthPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () => _controller.signIn(),
                           child: const Text(
                             'Entrar',
                             style: TextStyle(color: Colors.white),
