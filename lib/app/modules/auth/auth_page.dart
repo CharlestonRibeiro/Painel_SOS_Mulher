@@ -18,129 +18,136 @@ class AuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(ImagePaths.logo),
-          const SizedBox(width: 80),
-          SizedBox(
-            width: 300,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Entrar',
-                  style: TextStyle(
-                    color: Color(0xFF080A0B),
-                    fontSize: 48.0,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    height: 1.1667,
-                  ),
-                ),
-                const Text(
-                  'Painel de dados do SOS Mulher',
-                  style: TextStyle(
-                    color: Color(0xFF5D5D5B),
-                    fontSize: 14.0,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.normal,
-                    height: 1.2857,
-                  ),
-                ),
-                TextFormField(
-                  controller: _controller.email,
-                  validator: FormValidator.validateEmail,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      label: Text('E-mail'),
-                      hintStyle: TextStyle(color: Colors.black, fontSize: 14.0),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-                      suffixIcon: Icon(Icons.person)),
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                AnimatedBuilder(
-                  animation: _controller.isHidden,
-                  builder: (context, child) {
-                    return TextFormField(
-                      controller: _controller.password,
-                      obscureText: _controller.isHidden.value,
-                      validator: FormValidator.validatePassword,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          label: const Text('Senha'),
+      body: Center(
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          runAlignment: WrapAlignment.center,
+          children: [
+            Image.asset(ImagePaths.logo),
+            Container(
+              width: 460,
+              padding: const EdgeInsets.all(80),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Entrar',
+                      style: TextStyle(
+                        color: Color(0xFF080A0B),
+                        fontSize: 48.0,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        height: 1.1667,
+                      ),
+                    ),
+                    const Text(
+                      'Painel de dados do SOS Mulher',
+                      style: TextStyle(
+                        color: Color(0xFF5D5D5B),
+                        fontSize: 14.0,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.normal,
+                        height: 1.2857,
+                      ),
+                    ),
+                    TextFormField(
+                      controller: _controller.email,
+                      validator: FormValidator.validateEmail,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text('E-mail'),
                           hintStyle:
-                              const TextStyle(color: Colors.black, fontSize: 14.0),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          suffixIcon: InkWell(
-                                    onTap: () => _controller.hide(),
-                                    child: Icon(_controller.isHidden.value
-                                        ? Icons.visibility_off
-                                        : Icons.visibility),
-                                  )),
+                              TextStyle(color: Colors.black, fontSize: 14.0),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
+                          suffixIcon: Icon(Icons.person)),
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
                         color: Colors.black,
                       ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                BlocConsumer<AuthController, AuthStates>(
-                  bloc: _controller,
-                  listener: (context, state) => switch (state) {
-                    SuccessAuthState() =>
-                      Routes.i.pushNamedAndRemoveUntil(Routes.home),
-                    ErrorAuthState() =>
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.error.message),
-                        ),
-                      ),
-                    _ => null,
-                  },
-                  builder: (context, state) => switch (state) {
-                    LoadingAuthState() => const LoadingIndicator(
-                        colored: false,
-                      ),
-                    _ => SizedBox(
-                        width: 468.0,
-                        height: 48.0,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF3F8E40),
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(2.0),
-                            ),
-                            textStyle: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
+                    ),
+                    const SizedBox(height: 8),
+                    AnimatedBuilder(
+                      animation: _controller.isHidden,
+                      builder: (context, child) {
+                        return TextFormField(
+                          controller: _controller.password,
+                          obscureText: _controller.isHidden.value,
+                          validator: FormValidator.validatePassword,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              label: const Text('Senha'),
+                              hintStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 14.0),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              suffixIcon: InkWell(
+                                onTap: () => _controller.hide(),
+                                child: Icon(_controller.isHidden.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                              )),
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    BlocConsumer<AuthController, AuthStates>(
+                      bloc: _controller,
+                      listener: (context, state) => switch (state) {
+                        SuccessAuthState() =>
+                          Routes.i.pushNamedAndRemoveUntil(Routes.home),
+                        ErrorAuthState() =>
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.error.message),
                             ),
                           ),
-                          onPressed: () => _controller.signIn(),
-                          child: const Text(
-                            'Entrar',
-                            style: TextStyle(color: Colors.white),
+                        _ => null,
+                      },
+                      builder: (context, state) => switch (state) {
+                        LoadingAuthState() => const LoadingIndicator(
+                            colored: false,
                           ),
-                        ),
-                      ),
-                  },
+                        _ => SizedBox(
+                            width: 468.0,
+                            height: 48.0,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF3F8E40),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(2.0),
+                                ),
+                                textStyle: const TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              onPressed: () => _controller.signIn(),
+                              child: const Text(
+                                'Entrar',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
