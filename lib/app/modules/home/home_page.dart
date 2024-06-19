@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         LocationsMap(_controller),
                         const TitleText(),
-                        const OptionsBar(),
+                        OptionsBar(_controller),
                         AudioComponent(_audioController),
                       ],
                     ),

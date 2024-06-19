@@ -13,6 +13,7 @@ class LocationsMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
+      mapController: _controller.mapController,
       options: MapOptions(
         interactionOptions:
             const InteractionOptions(enableMultiFingerGestureRace: true),

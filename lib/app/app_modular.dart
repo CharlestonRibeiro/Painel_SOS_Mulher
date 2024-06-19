@@ -1,3 +1,4 @@
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'core/routes/routes.dart';
@@ -20,6 +21,7 @@ class AppModule extends Module {
   void binds(Injector i) {
     i.addSingleton<ClientInterface>(FirebaseClient.new);
     i.addSingleton(PositionRepository.new);
+    i.addInstance(MapController());
     i.addSingleton(HomeController.new);
     i.addSingleton(AudioRepository.new);
     i.addSingleton(AudioController.new);
