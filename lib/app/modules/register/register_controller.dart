@@ -18,6 +18,19 @@ class RegisterController extends Cubit<RegisterStates> {
 
   final email = TextEditingController(text: '');
   final password = TextEditingController(text: '');
+  final confirmPassword = TextEditingController(text: '');
+
+
+  final ValueNotifier<bool> isHidden = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> isHiddenConfirm = ValueNotifier<bool>(true);
+
+  void hide() {
+    isHidden.value = !isHidden.value;
+  }
+
+  void hideConfirm() {
+    isHiddenConfirm.value = !isHiddenConfirm.value;
+  }
 
   void signUp() async {
     emit(LoadingRegisterState());

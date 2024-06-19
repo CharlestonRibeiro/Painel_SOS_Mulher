@@ -72,41 +72,65 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  TextFormField(
-                    controller: _controller.password,
-                    validator: FormValidator.validatePassword,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text('Senha'),
-                        hintStyle:
-                            TextStyle(color: Colors.black, fontSize: 14.0),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-                        suffixIcon: Icon(Icons.remove_red_eye)),
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
+                  AnimatedBuilder(
+                      animation: _controller.isHidden,
+                      builder: (context, child) {
+                        return TextFormField(
+                          controller: _controller.password,
+                           obscureText: _controller.isHidden.value,
+                          validator: FormValidator.validatePassword,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              label: const Text('Senha'),
+                              hintStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 14.0),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                               suffixIcon: InkWell(
+                                onTap: () => _controller.hide(),
+                                child: Icon(_controller.isHidden.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                              )),
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        );
+                      }),
                   const SizedBox(height: 8),
-                  TextFormField(
-                    validator: (value) => FormValidator.confirmValidatePassword(
-                        _controller.password.value as String?, value),
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text('Confirma Senha'),
-                        hintStyle:
-                            TextStyle(color: Colors.black, fontSize: 14.0),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-                        suffixIcon: Icon(Icons.remove_red_eye)),
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
+                  AnimatedBuilder(
+                      animation: _controller.isHiddenConfirm,
+                      builder: (context, child) {
+                        return TextFormField(
+                          controller: _controller.confirmPassword,
+                          obscureText: _controller.isHiddenConfirm.value,
+                          validator: (value) =>
+                              FormValidator.confirmValidatePassword(
+                                  _controller.password.value as String?, value),
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              label: const Text('Confirma Senha'),
+                              hintStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 14.0),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              suffixIcon: InkWell(
+                                onTap: () => _controller.hideConfirm(),
+                                child: Icon(_controller.isHiddenConfirm.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                              )),
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        );
+                      }),
                   const SizedBox(height: 20),
                   BlocConsumer<RegisterController, RegisterStates>(
                     bloc: _controller,
