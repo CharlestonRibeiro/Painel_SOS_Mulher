@@ -11,6 +11,7 @@ import 'modules/audio/audio_module.dart';
 import 'modules/auth/auth_module.dart';
 import 'modules/home/home_controller.dart';
 import 'modules/home/home_module.dart';
+import 'modules/register/register_module.dart';
 
 class AppModule extends Module {
   @override
@@ -28,11 +29,11 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.module(Routes.root, module: HomeModule());
+    r.module(Routes.root, module: AuthModule());
     r.module(Routes.auth, module: AuthModule());
     r.module(Routes.home, module: HomeModule());
     r.module(Routes.audios, module: AudioModule());
     r.module(Routes.history, module: HomeModule());
-    r.module(Routes.register, module: HomeModule());
+    r.module(Routes.register, module: RegisterModule());
   }
 }

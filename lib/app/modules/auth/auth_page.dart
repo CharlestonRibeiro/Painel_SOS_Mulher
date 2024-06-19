@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/constants/image_paths.dart';
 import '../../core/routes/routes.dart';
+import '../../core/validator/form_validator.dart';
 import '../../core/widgets/loading_indicator.dart';
 import 'auth_controller.dart';
 import 'auth_states.dart';
@@ -15,35 +17,84 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    User? currentUser = firebaseAuth.currentUser;
-
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-        child: Column(
-          children: [
-            
-            Column(
-              mainAxisSize: MainAxisSize.min,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(ImagePaths.logo),
+          const SizedBox(width: 80),
+          SizedBox(
+            width: 300,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 8),
+                const Text(
+                  'Entrar',
+                  style: TextStyle(
+                    color: Color(0xFF080A0B),
+                    fontSize: 48.0,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    height: 1.1667,
+                  ),
+                ),
+                const Text(
+                  'Painel de dados do SOS Mulher',
+                  style: TextStyle(
+                    color: Color(0xFF5D5D5B),
+                    fontSize: 14.0,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.normal,
+                    height: 1.2857,
+                  ),
+                ),
                 TextFormField(
                   controller: _controller.email,
+                  validator: FormValidator.validateEmail,
                   decoration: const InputDecoration(
-                    label: Text('E-mail'),
+                      border: OutlineInputBorder(),
+                      label: Text('E-mail'),
+                      hintStyle: TextStyle(color: Colors.black, fontSize: 14.0),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
+                      suffixIcon: Icon(Icons.person)),
+                  style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 8),
-                TextFormField(
-                  controller: _controller.password,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    label: Text('Senha'),
-                  ),
+                AnimatedBuilder(
+                  animation: _controller.isHidden,
+                  builder: (context, child) {
+                    return TextFormField(
+                      controller: _controller.password,
+                      obscureText: _controller.isHidden.value,
+                      validator: FormValidator.validatePassword,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          label: const Text('Senha'),
+                          hintStyle:
+                              const TextStyle(color: Colors.black, fontSize: 14.0),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          suffixIcon: InkWell(
+                                    onTap: () => _controller.hide(),
+                                    child: Icon(_controller.isHidden.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                  )),
+                      style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 20),
-                BlocConsumer<AuthController, AuthState>(
+                BlocConsumer<AuthController, AuthStates>(
                   bloc: _controller,
                   listener: (context, state) => switch (state) {
                     SuccessAuthState() =>
@@ -60,17 +111,36 @@ class AuthPage extends StatelessWidget {
                     LoadingAuthState() => const LoadingIndicator(
                         colored: false,
                       ),
-                    _ => ElevatedButton(
-                    onPressed: currentUser == null ? _controller.signUp : _controller.signIn,
-                    child: const Text('FINALIZAR CADASTRO'),
-                    ),
+                    _ => SizedBox(
+                        width: 468.0,
+                        height: 48.0,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF3F8E40),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(2.0),
+                            ),
+                            textStyle: const TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () => _controller.signIn(),
+                          child: const Text(
+                            'Entrar',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                   },
                 ),
-               
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

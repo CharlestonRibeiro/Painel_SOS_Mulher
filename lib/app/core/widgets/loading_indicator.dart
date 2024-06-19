@@ -36,7 +36,7 @@ class LoadingIndicator extends StatelessWidget {
                 ? null
                 : colored!
                     ? Colors.black12
-                    : Colors.amber,
+                    : Colors.green, //TODO: VER SE DEIXA O VERDE OU VOLTA PARA O AMARELO
           );
   }
 }

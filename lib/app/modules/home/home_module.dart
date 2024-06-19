@@ -11,7 +11,7 @@ final class HomeModule extends Module {
   @override
   void routes(r) {
     r.child(
-      Routes.root,
+      Routes.root, 
       child: (context) => HomePage(Modular.get(), Modular.get()),
     );
   }
