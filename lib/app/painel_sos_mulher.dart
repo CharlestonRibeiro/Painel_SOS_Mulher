@@ -10,7 +10,7 @@ class PainelSosMulher extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        // useMaterial3: true,
+         useMaterial3: true,
       ),
       routerConfig: Modular.routerConfig,
     );

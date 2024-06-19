@@ -12,10 +12,14 @@ class AuthController extends Cubit<AuthStates> {
 
   final FirebaseUserRepository _authRepo;
 
-  final name = TextEditingController(text: '');
-  final lastName = TextEditingController(text: '');
   final email = TextEditingController(text: '');
   final password = TextEditingController(text: '');
+
+  final ValueNotifier<bool> isHidden = ValueNotifier<bool>(true);
+
+  void hide() {
+    isHidden.value = !isHidden.value;
+  }
 
   void signUp() async {
     emit(LoadingAuthState());
