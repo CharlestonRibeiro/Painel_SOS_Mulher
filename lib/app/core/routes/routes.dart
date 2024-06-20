@@ -7,7 +7,6 @@ abstract class Routes {
   static const home = '/home';
   static const auth = '/auth';
   static const audios = '/audios';
-  static const history = '/history';
   static const register = '/register';
 
   static const root = '/';

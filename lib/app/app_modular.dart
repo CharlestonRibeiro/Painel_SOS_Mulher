@@ -33,7 +33,6 @@ class AppModule extends Module {
     r.module(Routes.auth, module: AuthModule());
     r.module(Routes.home, module: HomeModule());
     r.module(Routes.audios, module: AudioModule());
-    r.module(Routes.history, module: HomeModule());
     r.module(Routes.register, module: RegisterModule());
   }
 }
