@@ -10,7 +10,10 @@ class PositionDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(position.name),
+      title: Text(
+        position.name,
+        textAlign: TextAlign.center,
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -23,11 +26,15 @@ class PositionDialog extends StatelessWidget {
           ? [
               ElevatedButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text('Desativar alerta'),
               ),
             ]
           : null,
+      actionsAlignment: MainAxisAlignment.center,
     );
   }
 }
