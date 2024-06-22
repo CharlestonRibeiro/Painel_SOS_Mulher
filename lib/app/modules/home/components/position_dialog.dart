@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/routes/routes.dart';
 import '../../../models/position_model.dart';
+import '../home_controller.dart';
 
 class PositionDialog extends StatelessWidget {
-  const PositionDialog(this.position, {super.key});
+  const PositionDialog(
+    this.position, {
+    required HomeController controller,
+    super.key,
+  }) : _controller = controller;
 
   final Position position;
+  final HomeController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,9 @@ class PositionDialog extends StatelessWidget {
       actions: position.alert
           ? [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => _controller
+                    .deactivateAlert(position)
+                    .then((result) => result ? Routes.i.maybePop() : {}),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,

@@ -40,7 +40,10 @@ class LocationsMap extends StatelessWidget {
               marker: InkWell(
                 onTap: () => showDialog(
                   context: context,
-                  builder: (context) => PositionDialog(e),
+                  builder: (context) => PositionDialog(
+                    e,
+                    controller: _controller,
+                  ),
                 ),
                 child: PositionMarker(e),
               ),

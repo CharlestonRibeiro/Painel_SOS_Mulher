@@ -18,4 +18,12 @@ final class PositionRepository {
       rethrow;
     }
   }
+
+  Future<bool> deactivateAlert(String id) async {
+    try {
+      return await _client.post('location', id, {'alert': false});
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

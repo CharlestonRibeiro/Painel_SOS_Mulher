@@ -59,4 +59,18 @@ final class FirebaseClient implements ClientInterface {
   Future<String> getFile(String id) async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> post(
+    String endpoint,
+    String id,
+    Map<String, dynamic> data,
+  ) async {
+    try {
+      await FirebaseFirestore.instance.doc('$endpoint/$id').update(data);
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
