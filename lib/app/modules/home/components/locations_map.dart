@@ -4,6 +4,8 @@ import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../home_controller.dart';
+import 'position_dialog.dart';
+import 'position_marker.dart';
 
 class LocationsMap extends StatelessWidget {
   const LocationsMap(this._controller, {super.key});
@@ -35,25 +37,16 @@ class LocationsMap extends StatelessWidget {
             ),
             style: LocationMarkerStyle(
               markerSize: const Size(400, 80),
-              marker: e.alert
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'SOS RECEBIDO\n${e.id}',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                        const Icon(
-                          Icons.location_history,
-                          color: Colors.red,
-                        ),
-                      ],
-                    )
-                  : const Icon(
-                      Icons.location_pin,
-                      color: Colors.green,
-                    ),
+              marker: InkWell(
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (context) => PositionDialog(
+                    e,
+                    controller: _controller,
+                  ),
+                ),
+                child: PositionMarker(e),
+              ),
             ),
           ),
         ),
