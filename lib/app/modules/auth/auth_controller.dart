@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:painel_sos_mulher/app/modules/auth/auth_states.dart';
 
 import '../../core/errors/app_error_interface.dart';
-import '../../data/repository/firebase_user_repository.dart';
+import '../../data/repository/firebase_user/firebase_user_repository.dart';
 
 class AuthController extends Cubit<AuthStates> {
   AuthController(this._authRepo) : super(InitialAuthState());
