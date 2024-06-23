@@ -45,8 +45,8 @@ final class Position {
           id: id,
           latitude: lat,
           longitude: lng,
-          alert: false,
-          name: '',
+          alert: true,
+          name: 'Anônimo',
         ),
       // Dados em formato incorreto
       _ => throw DataFormatError(map.toString(),

@@ -26,4 +26,15 @@ class HomeController extends Cubit<HomeState> {
       }
     }
   }
+
+  Future<bool> deactivateAlert(Position position) async {
+    try {
+      final result = await _repo.deactivateAlert(position.id);
+      await load();
+      return result;
+    } on AppError catch (e) {
+      emit(ErrorHomeState(e));
+      return false;
+    }
+  }
 }
