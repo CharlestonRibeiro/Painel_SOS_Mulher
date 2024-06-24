@@ -1,5 +1,4 @@
 abstract final class FormValidator {
-
   static String? validateEmail(String? value) {
     final validatedEmail = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (value != null && value.isEmpty) {
@@ -12,13 +11,14 @@ abstract final class FormValidator {
   }
 
   static String? validatePassword(String? value) {
-    final validatedPassword =
-        RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-    if (value != null && value.isEmpty) {
-      return "Campo obrigatório";
+    final RegExp validatedPassword =
+        RegExp(r"^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$");
+
+    if (value == null || value.isEmpty) {
+      return "Campo obrigatório.";
     }
-    if (value != null && !validatedPassword.hasMatch(value)) {
-      return "Dados inválidos";
+    if (!validatedPassword.hasMatch(value)) {
+      return "Deve conter 6 caracteres, letras e números.";
     }
     return null;
   }
@@ -28,9 +28,8 @@ abstract final class FormValidator {
       return "Campo obrigatório";
     }
     if (first != second) {
-      return "Dados inválidos";
+      return "As senhas não coincidem.";
     }
     return null;
   }
-
 }
