@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:painel_sos_mulher/app/modules/register/register_states.dart';
 
 import '../../core/errors/app_error_interface.dart';
-import '../../data/repository/firebase_user_repository.dart';
+import '../../data/repository/firebase_user/firebase_user_repository.dart';
 
 
 class RegisterController extends Cubit<RegisterStates> {
