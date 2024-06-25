@@ -98,6 +98,12 @@ class AuthPage extends StatelessWidget {
                         );
                       },
                     ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: _controller.recoveryPassword,
+                          child: const Text('Esqueci minha senha')),
+                    ),
                     const SizedBox(height: 20),
                     BlocConsumer<AuthController, AuthStates>(
                       bloc: _controller,

@@ -51,13 +51,14 @@ class FirebaseUserRepository {
     }
   }
 
-  Future<void> sentPasswordRecoveryEmail({required String email}) async {
+  Future<void> sendPasswordRecoveryEmail({required String email}) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       /// Tratando a exceção com a classe FirebaseUserException
       final error = FirebaseUserException(e);
       log(error.message);
+
       /// Lança a exceção para o invocador do método signUp lidar com ela, se necessário
       throw error;
     } catch (e) {
