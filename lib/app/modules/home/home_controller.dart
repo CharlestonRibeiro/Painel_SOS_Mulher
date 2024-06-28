@@ -19,6 +19,7 @@ class HomeController extends Cubit<HomeState> {
     if (state is! LoadingHomeState) {
       emit(LoadingHomeState());
       try {
+        allPositions.clear();
         allPositions.addAll(await _repo.getAllPositions());
         emit(SuccessHomeState());
       } on AppError catch (e) {
