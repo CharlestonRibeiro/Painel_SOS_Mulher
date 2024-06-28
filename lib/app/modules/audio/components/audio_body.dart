@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/datetime_readable.dart';
+import '../../../models/position_model.dart';
 import '../../home/home_controller.dart';
+import '../../home/home_states.dart';
 import '../audio_controller.dart';
 import '../audio_states.dart';
 import 'player/audio_player.dart';
-import 'position_text.dart';
 
 class AudioBody extends StatelessWidget {
   const AudioBody(this._controller, this._homeController, {super.key});
@@ -32,24 +33,39 @@ class AudioBody extends StatelessWidget {
                 return Column(
                   children: [
                     Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            audioData.name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(fontWeight: FontWeight.w900),
-                          ),
-                          Text(
-                            audioData.id,
-                            style: const TextStyle(color: Colors.grey),
-                          ),
-                          const SizedBox(height: 20),
-                          Text(audioData.time.toReadable()),
-                          PositionText(_homeController, audioData),
-                        ],
+                      child: BlocBuilder<HomeController, HomeState>(
+                        bloc: _homeController,
+                        builder: (context, state) {
+                          final position =
+                              _homeController.allPositions.firstWhere(
+                            (e) => e.id == audioData.id,
+                            orElse: Position.empty,
+                          );
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                position.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(fontWeight: FontWeight.w900),
+                              ),
+                              Text(
+                                audioData.id,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                              const SizedBox(height: 20),
+                              Text(audioData.time.toReadable()),
+                              switch (state) {
+                                SuccessHomeState() => Text(
+                                    '(${position.latitude}, ${position.longitude})',
+                                  ),
+                                _ => const Text(''),
+                              },
+                            ],
+                          );
+                        },
                       ),
                     ),
                     AudioPlayer(_controller),
