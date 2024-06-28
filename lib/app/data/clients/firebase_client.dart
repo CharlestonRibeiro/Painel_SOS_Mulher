@@ -46,7 +46,11 @@ final class FirebaseClient implements ClientInterface {
         final docs = await idRef.list();
         for (var docRef in docs.items) {
           final url = await docRef.getDownloadURL();
-          list.add({'id': idRef.name, 'url': url, 'time': docRef.name});
+          list.add({
+            'id': idRef.name,
+            'url': url,
+            'time': docRef.name.replaceAll('.wav', ''),
+          });
         }
       }
       return list;
