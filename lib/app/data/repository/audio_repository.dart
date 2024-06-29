@@ -18,4 +18,12 @@ final class AudioRepository {
       rethrow;
     }
   }
+
+  Future<bool> dismissAudio(Audio audio) async {
+    try {
+      return await _client.create('dismissed-audios', audio.toMap());
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
