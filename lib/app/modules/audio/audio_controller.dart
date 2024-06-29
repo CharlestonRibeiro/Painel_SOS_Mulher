@@ -99,4 +99,15 @@ class AudioController extends Cubit<AudioState> {
     playingIndex.value = selectedIndex.value;
     _player.play();
   }
+
+  Future<void> dismiss(int index) async {
+    emit(LoadingAudioState());
+    try {
+      await _repo.dismissAudio(allAudios[index]);
+      emit(SuccessAudioState('Áudio arquivado com sucesso!'));
+    } on AppError catch (e) {
+      emit(ErrorAudioState(e));
+    }
+    load();
+  }
 }

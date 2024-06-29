@@ -6,7 +6,11 @@ class InitialAudioState implements AudioState {}
 
 class LoadingAudioState implements AudioState {}
 
-class SuccessAudioState implements AudioState {}
+class SuccessAudioState implements AudioState {
+  SuccessAudioState([this.message]);
+
+  final String? message;
+}
 
 class ErrorAudioState implements AudioState {
   ErrorAudioState(this.error);
