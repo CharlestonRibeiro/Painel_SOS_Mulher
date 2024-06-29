@@ -63,6 +63,11 @@ class AudioBody extends StatelessWidget {
                                   ),
                                 _ => const Text(''),
                               },
+                              const SizedBox(height: 40),
+                              FloatingActionButton.extended(
+                                onPressed: _controller.dismiss,
+                                label: const Text('ARQUIVAR'),
+                              ),
                             ],
                           );
                         },
