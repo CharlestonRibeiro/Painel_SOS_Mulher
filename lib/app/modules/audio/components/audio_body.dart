@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/datetime_readable.dart';
+import '../../../core/routes/routes.dart';
 import '../../../models/position_model.dart';
 import '../../home/home_controller.dart';
 import '../../home/home_states.dart';
@@ -61,11 +62,28 @@ class AudioBody extends StatelessWidget {
                                 SuccessHomeState() => Text(
                                     '(${position.latitude}, ${position.longitude})',
                                   ),
-                                _ => const Text(''),
+                                _ => const Text('Carregando localização...'),
                               },
                               const SizedBox(height: 40),
                               FloatingActionButton.extended(
-                                onPressed: _controller.dismiss,
+                                elevation: 0,
+                                onPressed: () => showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Text('Arquivar'),
+                                    content: const Text(
+                                        'Tem certeza que deseja arquivar este áudio?'),
+                                    actions: [
+                                      FilledButton(
+                                        onPressed: () {
+                                          _controller.dismiss();
+                                          Routes.i.maybePop();
+                                        },
+                                        child: const Text('Arquivar'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 label: const Text('ARQUIVAR'),
                               ),
                             ],
