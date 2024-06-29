@@ -60,11 +60,6 @@ final class FirebaseClient implements ClientInterface {
   }
 
   @override
-  Future<String> getFile(String id) async {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<bool> post(
     String endpoint,
     String id,
@@ -72,6 +67,16 @@ final class FirebaseClient implements ClientInterface {
   ) async {
     try {
       await FirebaseFirestore.instance.doc('$endpoint/$id').update(data);
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+  
+  @override
+  Future<bool> create(String endpoint, Map<String, dynamic> data) async {
+    try {
+      await FirebaseFirestore.instance.collection(endpoint).add(data);
       return true;
     } catch (e) {
       rethrow;
