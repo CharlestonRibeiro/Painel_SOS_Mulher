@@ -15,8 +15,8 @@ final class Position {
     required this.name,
   });
 
-  factory Position.empty() =>
-      Position(id: '', latitude: 0, longitude: 0, alert: false, name: '');
+  factory Position.empty() => Position(
+      id: '', latitude: 0, longitude: 0, alert: false, name: 'Anônimo');
 
   factory Position.fromMap(Map<String, dynamic> map) {
     return switch (map) {

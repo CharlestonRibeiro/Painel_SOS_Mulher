@@ -49,7 +49,7 @@ final class FirebaseClient implements ClientInterface {
           list.add({
             'id': idRef.name,
             'url': url,
-            'time': docRef.name.replaceAll('.wav', ''),
+            'time': docRef.name.split('.')[0],
           });
         }
       }
