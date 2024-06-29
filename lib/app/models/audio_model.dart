@@ -21,7 +21,7 @@ final class Audio {
         Audio(
           id: id,
           url: url,
-          time: DateTime.parse(time.replaceAll('_', ':')),
+          time: DateTime.parse(time.replaceAll('_', ' :')),
         ),
       _ => throw DataFormatError(
           map.toString(),
@@ -29,4 +29,10 @@ final class Audio {
         ),
     };
   }
+
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'url': url,
+        'time': time.toIso8601String(),
+      };
 }
