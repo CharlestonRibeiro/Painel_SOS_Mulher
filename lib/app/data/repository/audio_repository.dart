@@ -8,10 +8,10 @@ final class AudioRepository {
 
   Future<List<Audio>> getAllAudios() async {
     try {
-      final data = await _client.getAllFiles();
+      final data = await _client.getAllById('active-audios');
       final audios = <Audio>[];
-      for (var map in data) {
-        audios.add(Audio.fromMap(map));
+      for (var (id, map) in data) {
+        audios.add(Audio.fromMap(id, map));
       }
       return audios;
     } catch (e) {
@@ -21,7 +21,8 @@ final class AudioRepository {
 
   Future<bool> dismissAudio(Audio audio) async {
     try {
-      return await _client.create('dismissed-audios', audio.toMap());
+      await _client.create('dismissed-audios', audio.toMap());
+      return await _client.delete('active-audios', audio.id);
     } catch (e) {
       rethrow;
     }
