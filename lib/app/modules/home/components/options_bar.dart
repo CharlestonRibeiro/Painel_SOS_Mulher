@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:painel_sos_mulher/app/core/extensions/string_ignorecase.dart';
 
 import '../home_controller.dart';
 
@@ -50,17 +51,14 @@ class OptionsBar extends StatelessWidget {
   ) =>
       _homeController.allPositions
           .where((e) =>
-              e.name.toLowerCase().contains(controller.text.toLowerCase()) ||
-              e.id.toLowerCase().contains(controller.text.toLowerCase()))
+              e.name.containsIgnoreCase(controller.text) ||
+              e.id.containsIgnoreCase(controller.text))
           .map(
             (e) => ListTile(
               title: Text(e.name),
               subtitle: Text(e.id),
               leading: e.alert
-                  ? const Icon(
-                      Icons.priority_high,
-                      color: Colors.red,
-                    )
+                  ? const Icon(Icons.priority_high, color: Colors.red)
                   : null,
               onTap: () => _homeController.mapController
                   .move(LatLng(e.latitude, e.longitude), 18),
