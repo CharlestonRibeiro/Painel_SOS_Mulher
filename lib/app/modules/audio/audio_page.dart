@@ -23,7 +23,7 @@ class AudioPage extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                const TopBar(),
+                TopBar(_controller),
                 Expanded(
                   child: Row(
                     children: [
