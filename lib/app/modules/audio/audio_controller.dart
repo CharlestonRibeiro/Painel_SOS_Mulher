@@ -21,7 +21,8 @@ class AudioController extends Cubit<AudioState> {
   }
 
   final AudioRepository _repo;
-  final allAudios = <Audio>[];
+  final activeAudios = <Audio>[];
+  final dismissedAudios = <Audio>[];
   final durations = <(Duration, String)>[];
   final _player = AudioPlayer();
   final selectedIndex = ValueNotifier(-1);
@@ -32,10 +33,14 @@ class AudioController extends Cubit<AudioState> {
     if (state is! LoadingAudioState) {
       emit(LoadingAudioState());
       try {
-        allAudios.clear();
+        activeAudios.clear();
         durations.clear();
-        allAudios.addAll(await _repo.getAllAudios());
-        for (var audio in allAudios) {
+        activeAudios.addAll(await _repo.getActiveAudios());
+        _repo.getDismissedAudios().then((audios) {
+          dismissedAudios.clear();
+          dismissedAudios.addAll(audios);
+        });
+        for (var audio in activeAudios) {
           final duration = await _player.setUrl(audio.url);
           durations.add((duration!, duration.toString().split('.')[0]));
         }
@@ -48,7 +53,7 @@ class AudioController extends Cubit<AudioState> {
 
   Future<void> play(int index) async {
     playingIndex.value = index;
-    await _player.setUrl(allAudios[index].url);
+    await _player.setUrl(activeAudios[index].url);
     await _player.play();
   }
 
@@ -65,7 +70,7 @@ class AudioController extends Cubit<AudioState> {
   }
 
   void next() {
-    if (selectedIndex.value < allAudios.length - 1) {
+    if (selectedIndex.value < activeAudios.length - 1) {
       selectedIndex.value = selectedIndex.value + 1;
       play(selectedIndex.value);
     }
@@ -103,7 +108,7 @@ class AudioController extends Cubit<AudioState> {
   Future<void> dismiss() async {
     emit(LoadingAudioState());
     try {
-      await _repo.dismissAudio(allAudios[selectedIndex.value]);
+      await _repo.dismissAudio(activeAudios[selectedIndex.value]);
       emit(SuccessAudioState('Áudio arquivado com sucesso!'));
     } on AppError catch (e) {
       emit(ErrorAudioState(e));
