@@ -13,6 +13,7 @@ final class AudioRepository {
       for (var (id, map) in data) {
         audios.add(Audio.fromMap(id, map));
       }
+      audios.sort((a, b) => a.time.compareTo(b.time));
       return audios;
     } catch (e) {
       rethrow;
@@ -26,6 +27,7 @@ final class AudioRepository {
       for (var (id, map) in data) {
         audios.add(Audio.fromMap(id, map));
       }
+      audios.sort((a, b) => a.time.compareTo(b.time));
       return audios;
     } catch (e) {
       rethrow;
