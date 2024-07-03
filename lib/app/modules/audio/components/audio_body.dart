@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/datetime_readable.dart';
 import '../../../core/routes/routes.dart';
-import '../../../models/position_model.dart';
 import '../../home/home_controller.dart';
-import '../../home/home_states.dart';
 import '../audio_controller.dart';
 import '../audio_states.dart';
 import 'player/audio_player.dart';
+import 'position_text.dart';
 
 class AudioBody extends StatelessWidget {
   const AudioBody(this._controller, this._homeController, {super.key});
@@ -34,61 +33,46 @@ class AudioBody extends StatelessWidget {
                 return Column(
                   children: [
                     Expanded(
-                      child: BlocBuilder<HomeController, HomeState>(
-                        bloc: _homeController,
-                        builder: (context, state) {
-                          final position =
-                              _homeController.allPositions.firstWhere(
-                            (e) => e.id == audioData.id,
-                            orElse: Position.empty,
-                          );
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                position.name,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontWeight: FontWeight.w900),
-                              ),
-                              Text(
-                                audioData.id,
-                                style: const TextStyle(color: Colors.grey),
-                              ),
-                              const SizedBox(height: 20),
-                              Text(audioData.time.toReadable()),
-                              switch (state) {
-                                SuccessHomeState() => Text(
-                                    '(${position.latitude}, ${position.longitude})',
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            audioData.username,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(fontWeight: FontWeight.w900),
+                          ),
+                          Text(
+                            audioData.uid,
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                          const SizedBox(height: 20),
+                          Text(audioData.time.toReadable()),
+                          PositionText(_homeController, audioData),
+                          const SizedBox(height: 40),
+                          FloatingActionButton.extended(
+                            elevation: 0,
+                            onPressed: () => showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Arquivar'),
+                                content: const Text(
+                                    'Tem certeza que deseja arquivar este áudio?'),
+                                actions: [
+                                  FilledButton(
+                                    onPressed: () {
+                                      _controller.dismiss();
+                                      Routes.i.maybePop();
+                                    },
+                                    child: const Text('Arquivar'),
                                   ),
-                                _ => const Text('Carregando localização...'),
-                              },
-                              const SizedBox(height: 40),
-                              FloatingActionButton.extended(
-                                elevation: 0,
-                                onPressed: () => showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: const Text('Arquivar'),
-                                    content: const Text(
-                                        'Tem certeza que deseja arquivar este áudio?'),
-                                    actions: [
-                                      FilledButton(
-                                        onPressed: () {
-                                          _controller.dismiss();
-                                          Routes.i.maybePop();
-                                        },
-                                        child: const Text('Arquivar'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                label: const Text('ARQUIVAR'),
+                                ],
                               ),
-                            ],
-                          );
-                        },
+                            ),
+                            label: const Text('ARQUIVAR'),
+                          ),
+                        ],
                       ),
                     ),
                     AudioPlayer(_controller),

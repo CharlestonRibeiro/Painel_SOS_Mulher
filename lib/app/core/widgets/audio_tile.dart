@@ -6,7 +6,7 @@ class AudioTile extends StatelessWidget {
     required this.isSelected,
     required this.isPlaying,
     required this.index,
-    required this.id,
+    required this.label,
     required this.duration,
     required this.playFunction,
     required this.showPlayingIcon,
@@ -16,7 +16,7 @@ class AudioTile extends StatelessWidget {
   final bool isPlaying;
   final bool showPlayingIcon;
   final int index;
-  final String id;
+  final String label;
   final String duration;
   final VoidCallback playFunction;
 
@@ -37,7 +37,7 @@ class AudioTile extends StatelessWidget {
                   )
                 : const SizedBox.shrink()
             : null,
-        title: Text('$index. $id'),
+        title: Text('$index. $label'),
         trailing: Text(duration),
       ),
     );
