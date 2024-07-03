@@ -6,13 +6,28 @@ final class AudioRepository {
 
   final ClientInterface _client;
 
-  Future<List<Audio>> getAllAudios() async {
+  Future<List<Audio>> getActiveAudios() async {
     try {
       final data = await _client.getAllById('active-audios');
       final audios = <Audio>[];
       for (var (id, map) in data) {
         audios.add(Audio.fromMap(id, map));
       }
+      audios.sort((a, b) => a.time.compareTo(b.time));
+      return audios;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Audio>> getDismissedAudios() async {
+    try {
+      final data = await _client.getAllById('dismissed-audios');
+      final audios = <Audio>[];
+      for (var (id, map) in data) {
+        audios.add(Audio.fromMap(id, map));
+      }
+      audios.sort((a, b) => a.time.compareTo(b.time));
       return audios;
     } catch (e) {
       rethrow;

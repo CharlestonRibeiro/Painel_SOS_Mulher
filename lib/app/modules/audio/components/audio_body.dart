@@ -29,7 +29,7 @@ class AudioBody extends StatelessWidget {
               if (index == -1) {
                 return const SizedBox.shrink();
               } else {
-                final audioData = _controller.allAudios[index];
+                final audioData = _controller.activeAudios[index];
                 return Column(
                   children: [
                     Expanded(

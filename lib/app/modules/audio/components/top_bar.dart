@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/datetime_readable.dart';
+import '../../../core/extensions/string_ignorecase.dart';
+import '../audio_controller.dart';
+
 class TopBar extends StatelessWidget {
-  const TopBar({super.key});
+  const TopBar(this._controller, {super.key});
+
+  final AudioController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +32,22 @@ class TopBar extends StatelessWidget {
                 RoundedRectangleBorder(),
               ),
               viewShape: const RoundedRectangleBorder(),
-              suggestionsBuilder: (
-                BuildContext context,
-                SearchController controller,
-              ) =>
-                  [],
+              suggestionsBuilder: (context, controller) {
+                final suggestions = [
+                  ..._controller.dismissedAudios.where(
+                      (e) => e.username.containsIgnoreCase(controller.text)),
+                ];
+                suggestions.addAll(
+                  _controller.activeAudios.where(
+                      (e) => e.username.containsIgnoreCase(controller.text)),
+                );
+                return suggestions.map(
+                  (e) => ListTile(
+                    title: Text(e.username),
+                    subtitle: Text(e.time.toReadable()),
+                  ),
+                );
+              },
             ),
           ),
         ],

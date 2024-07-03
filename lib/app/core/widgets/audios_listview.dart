@@ -26,7 +26,7 @@ class AudiosListView extends StatelessWidget {
           InitialAudioState() =>
             const Center(child: CircularProgressIndicator()),
           SuccessAudioState() => ListView.builder(
-              itemCount: _controller.allAudios.length,
+              itemCount: _controller.activeAudios.length,
               itemBuilder: (context, index) => ValueListenableBuilder(
                 valueListenable: _controller.playingIndex,
                 builder: (context, value, child) => AudioTile(
@@ -34,7 +34,7 @@ class AudiosListView extends StatelessWidget {
                   isSelected: index == _controller.selectedIndex.value,
                   isPlaying: index == _controller.playingIndex.value,
                   index: index + 1,
-                  label: _controller.allAudios[index].username,
+                  label: _controller.activeAudios[index].username,
                   duration: _controller.durations[index].$2,
                   playFunction: () => _controller.select(index),
                 ),
