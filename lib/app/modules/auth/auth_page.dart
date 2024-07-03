@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/constants/image_paths.dart';
 import '../../core/routes/routes.dart';
 import '../../core/validator/form_validator.dart';
-import '../../core/widgets/loading_indicator.dart';
 import 'auth_controller.dart';
 import 'auth_states.dart';
 
@@ -54,6 +53,8 @@ class AuthPage extends StatelessWidget {
                     TextFormField(
                       controller: _controller.email,
                       validator: FormValidator.validateEmail,
+                      textInputAction: TextInputAction.next,
+                      autofocus: true,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           label: Text('E-mail'),
@@ -76,6 +77,8 @@ class AuthPage extends StatelessWidget {
                           controller: _controller.password,
                           obscureText: _controller.isHidden.value,
                           validator: FormValidator.validatePassword,
+                          textInputAction: TextInputAction.done,
+                          onFieldSubmitted: (_) => _controller.signIn(),
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               label: const Text('Senha'),
@@ -84,7 +87,7 @@ class AuthPage extends StatelessWidget {
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               suffixIcon: InkWell(
-                                onTap: () => _controller.hide(),
+                                onTap: _controller.hide,
                                 child: Icon(_controller.isHidden.value
                                     ? Icons.visibility_off
                                     : Icons.visibility),
@@ -119,9 +122,7 @@ class AuthPage extends StatelessWidget {
                         _ => null,
                       },
                       builder: (context, state) => switch (state) {
-                        LoadingAuthState() => const LoadingIndicator(
-                            colored: false,
-                          ),
+                        LoadingAuthState() => const CircularProgressIndicator(),
                         _ => SizedBox(
                             width: 468.0,
                             height: 48.0,
@@ -139,7 +140,7 @@ class AuthPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              onPressed: () => _controller.signIn(),
+                              onPressed: _controller.signIn,
                               child: const Text(
                                 'Entrar',
                                 style: TextStyle(color: Colors.white),

@@ -4,11 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import 'package:painel_sos_mulher/app/core/validator/form_validator.dart';
-
 import '../../core/constants/image_paths.dart';
 import '../../core/routes/navigation_side_bar.dart';
-import '../../core/widgets/loading_indicator.dart';
+import '../../core/validator/form_validator.dart';
 import 'register_controller.dart';
 import 'register_states.dart';
 
@@ -59,6 +57,7 @@ class RegisterPage extends StatelessWidget {
                         TextFormField(
                           controller: _controller.email,
                           validator: FormValidator.validateEmail,
+                          textInputAction: TextInputAction.next,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             label: Text('E-mail'),
@@ -83,6 +82,7 @@ class RegisterPage extends StatelessWidget {
                                 controller: _controller.password,
                                 obscureText: _controller.isHidden.value,
                                 validator: FormValidator.validatePassword,
+                                textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     label: const Text('Senha'),
@@ -111,6 +111,7 @@ class RegisterPage extends StatelessWidget {
                               return TextFormField(
                                 controller: _controller.confirmPassword,
                                 obscureText: _controller.isHiddenConfirm.value,
+                                textInputAction: TextInputAction.next,
                                 validator: (value) =>
                                     FormValidator.confirmValidatePassword(
                                         _controller.password.text as String?,
@@ -162,9 +163,8 @@ class RegisterPage extends StatelessWidget {
                             _ => null,
                           },
                           builder: (context, state) => switch (state) {
-                            LoadingRegisterState() => const LoadingIndicator(
-                                colored: false,
-                              ),
+                            LoadingRegisterState() =>
+                              const CircularProgressIndicator(),
                             _ => SizedBox(
                                 width: 468.0,
                                 height: 48.0,
