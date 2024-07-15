@@ -109,6 +109,8 @@ class AudioController extends Cubit<AudioState> {
     emit(LoadingAudioState());
     try {
       await _repo.dismissAudio(activeAudios[selectedIndex.value]);
+      selectedIndex.value--;
+      playingIndex.value--;
       emit(SuccessAudioState('Áudio arquivado com sucesso!'));
     } on AppError catch (e) {
       emit(ErrorAudioState(e));
