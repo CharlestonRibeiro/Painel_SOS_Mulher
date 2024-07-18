@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'model_errors.dart';
 
 final class Position {
@@ -6,6 +8,7 @@ final class Position {
   final double longitude;
   final bool alert;
   final String name;
+  final DateTime time;
 
   Position({
     required this.id,
@@ -13,10 +16,17 @@ final class Position {
     required this.longitude,
     required this.alert,
     required this.name,
+    required this.time,
   });
 
   factory Position.empty() => Position(
-      id: '', latitude: 0, longitude: 0, alert: false, name: 'Anônimo');
+        id: '',
+        latitude: 0,
+        longitude: 0,
+        alert: false,
+        name: 'Anônimo',
+        time: DateTime.now(),
+      );
 
   factory Position.fromMap(Map<String, dynamic> map) {
     return switch (map) {
@@ -27,6 +37,7 @@ final class Position {
         'longitude': double lng,
         'alert': bool alert,
         'name': String name,
+        'updated-at': Timestamp time, 
       } =>
         Position(
           id: id,
@@ -34,6 +45,7 @@ final class Position {
           longitude: lng,
           alert: alert,
           name: name,
+          time: time.toDate(),
         ),
       // Cenário atual
       {
@@ -47,6 +59,7 @@ final class Position {
           longitude: lng,
           alert: true,
           name: 'Anônimo',
+          time: DateTime.now(),
         ),
       // Dados em formato incorreto
       _ => throw DataFormatError(map.toString(),

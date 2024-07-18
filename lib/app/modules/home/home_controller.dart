@@ -21,6 +21,7 @@ class HomeController extends Cubit<HomeState> {
       try {
         allPositions.clear();
         allPositions.addAll(await _repo.getAllPositions());
+        allPositions.sort((a, b) => b.time.compareTo(a.time));
         emit(SuccessHomeState());
       } on AppError catch (e) {
         emit(ErrorHomeState(e));
