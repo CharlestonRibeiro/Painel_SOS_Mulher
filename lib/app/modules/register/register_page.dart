@@ -37,7 +37,7 @@ class RegisterPage extends StatelessWidget {
                     child: Column(
                       children: [
                         const Text(
-                          'Registar',
+                          'Registrar',
                           style: TextStyle(
                             color: Color(0xFF080A0B),
                             fontSize: 48.0,
