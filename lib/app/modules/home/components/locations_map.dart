@@ -36,7 +36,7 @@ class LocationsMap extends StatelessWidget {
               accuracy: 0.1,
             ),
             style: LocationMarkerStyle(
-              markerSize: const Size(400, 80),
+              markerSize: const Size(100, 56),
               marker: InkWell(
                 onTap: () => showDialog(
                   context: context,

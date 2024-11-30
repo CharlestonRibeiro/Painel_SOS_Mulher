@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../models/position_model.dart';
 import '../clients/client_interface.dart';
 
@@ -11,7 +13,11 @@ final class PositionRepository {
       final data = await _client.getAll('location');
       final positions = <Position>[];
       for (var map in data) {
-        positions.add(Position.fromMap(map));
+        try {
+          positions.add(Position.fromMap(map));
+        } catch (e) {
+          log('Erro ao converter o mapa para Position: $e');
+        }
       }
       return positions;
     } catch (e) {
