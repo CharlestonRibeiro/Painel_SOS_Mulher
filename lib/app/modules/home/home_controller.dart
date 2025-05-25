@@ -7,9 +7,7 @@ import '../../models/position_model.dart';
 import 'home_states.dart';
 
 class HomeController extends Cubit<HomeState> {
-  HomeController(this._repo, this.mapController) : super(InitialHomeState()) {
-    load();
-  }
+  HomeController(this._repo, this.mapController) : super(InitialHomeState());
 
   final PositionRepository _repo;
   final allPositions = <Position>[];

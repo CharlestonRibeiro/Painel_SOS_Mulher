@@ -22,9 +22,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+const _timerDuration = Duration(seconds: 10);
 
-  Timer? _refreshtimer;
+class _HomePageState extends State<HomePage> {
+  Timer? _refreshTimer;
 
   @override
   void initState() {
@@ -33,14 +34,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   void refreshInterval() {
-        _refreshtimer = Timer.periodic( const Duration(seconds: 10) , (timer) {
-        widget._controller.load();
-      });
+    widget._controller.load();
+
+    _refreshTimer = Timer.periodic(_timerDuration, (_) {
+      widget._controller.load();
+    });
   }
 
   @override
   void dispose() {
-    _refreshtimer?.cancel();
+    _refreshTimer?.cancel();
     super.dispose();
   }
 
@@ -63,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                       fit: StackFit.expand,
                       children: [
                         LocationsMap(widget._controller),
-                        TitleText(interval: _refreshtimer?.tick.toString() ?? '0'),
+                        const TitleText(),
                         OptionsBar(widget._controller),
                         AudioComponent(widget._audioController),
                       ],
