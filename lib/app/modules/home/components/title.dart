@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TitleText extends StatelessWidget {
-  const TitleText({super.key});
+  final String interval;
+  const TitleText({super.key, required this.interval});
+
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class TitleText extends StatelessWidget {
         color: Colors.black45,
         padding: const EdgeInsets.all(20),
         child: Text(
-          'LOCALIZAÇÕES',
+          'LOCALIZAÇÕES $interval',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
